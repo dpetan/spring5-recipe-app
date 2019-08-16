@@ -38,11 +38,11 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests!
-      - run: mvn integration-test cobertura:cobertura
+      - run: mvn integration-test jacoco:report
 
       - store_test_results:
           path: target/surefire-reports
 
       - run:
           name: Send to CodeCov
-          command: bash <(curl -s https://codecov.io/bash)
+          command: export CODECOV_TOKEN="e4cd7a7f-733c-4ba1-8faf-325f02dd706c" && bash <(curl -s https://codecov.io/bash)
